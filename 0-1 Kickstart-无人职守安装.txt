@@ -43,11 +43,20 @@ anaconda	-	这个是red hat安装脚本， 用python写的
 		#part /boot --fstype ext3 --size=200 	【boot 分200MB】
 		#part swap --size = 256					【swap分区】
 
+		选择包
 		%Pachkages 			【 需要的安装的包 ， 可通过 system-config-package 查看】
 		@ admin-tools		【 @是一组包，而不是1个包，例如x-windows里面有38个包】
 		kernel 				【 1个包，因为不带@ 】
 		grub
 		kernel-devel
+
+		%pre				【系统安装前，需要的shell脚本， 这个通常不会被用到】
+
+		%post  				【系统安装完成后， 加 shell 脚本】
+		chkconfig httpd on	【系统安装后，把 httpd 服务打开】
+		useradd lixuefei 	【系统安装后，自动添加 lixuefei 用户】
+		cp /mnt/abc/passwd /etc/passwd
+
 
 
 
