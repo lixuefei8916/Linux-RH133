@@ -20,7 +20,11 @@ anaconda	-	这个是red hat安装脚本， 用python写的
 		text				【全文本，不要图形界面，这样会很快】
 		reboot				【安装后自动重启系统，否则可能会停止在 finish界面】
 		install				【安装，也有update升级的选项】
-		cdrom				【数据源 | 也可以是共享： nfs --server=192.168.1.100 --dir=/var/ftp/pub/RHEL5】
+		cdrom				【数据源 | 
+							【也可以是共享： nfs --server=192.168.1.100 --dir=/var/ftp/pub/RHEL5】
+							【ftp :   /var/ftp】
+
+		key --skip			【跳过输入 序列号，否则安装时会卡在这里等待输入】
 
 		langsupport --default=en_US.UFT-8 zh_CN.UTF-8 en_US.UTF-8  【默认英文，但需要中文支持】
 		lang en_US.UTF-8	【纯用英文】
@@ -58,7 +62,8 @@ anaconda	-	这个是red hat安装脚本， 用python写的
 		/sbin/useradd lixuefei 	【系统安装后，自动添加 lixuefei 用户】
 		cp /mnt/abc/passwd /etc/passwd
 
-2. 服务端(1.100)
+=============================================================================
+2.1 服务端(1.100  nfs方法)
 	yum install system-config-kickstart 	【 必须有 X-windows 】
 	system-config-kickstart					【 必须有 X-windows 】
 	此时过程如同 图形界面的安装界面
@@ -82,8 +87,36 @@ anaconda	-	这个是red hat安装脚本， 用python写的
 3. 客户端（自动安装端）
 	安装界面时输入
 	boot: linux ks=nfs:192.168.1.100:/var/ftp/ks.cfg
+======================================================================================
+
+2.1 服务端(1.100  ftp方法)
+	yum install system-config-kickstart 	【 必须有 X-windows 】
+	system-config-kickstart					【 必须有 X-windows 】
+	此时过程如同 图形界面的安装界面
+
+	或者 cp ~/anaconda-ks.cfg ks.cfg
+		vim ks.cfg
+			ftp server: 192.168.1.100
+			ftp Directory: /pub/RHEL5  		【放光盘文件的目录， pwd在 /var/ftp/pub/RHEL5】
+
+	配置完后，放置在  ks.cfg 目录中
+	cp /root/ks.cfg /var/ftp  			【准备 kickstart配置文件】
+
+	mkdir -p /var/ftp/pub/RHEL5			【准备 安装镜像 】
+	mount /dev/cdrom /mnt/
+	cp -r /mnt/* /var/ftp/pub/RHEL5
+
+	rpm -ivh vsftpd-2.5.0.....i386.rpm
+	service vsftpd start
+
+	lftp 192.168.1.100
+		ls
+		有 ks.cfg文件
 
 
+3. 客户端（自动安装端）
+	安装界面时输入
+	boot: linux ks=ftp://192.168.1.100:/ks.cfg
 
 
 
