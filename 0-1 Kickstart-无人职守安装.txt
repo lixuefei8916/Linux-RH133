@@ -1,2 +1,55 @@
-17 - 图形界面体系
+0-1 Kickstart-无人职守安装
+
+anaconda	-	这个是red hat安装脚本， 用python写的
+				anaconda-ks.cfg
+				在光盘安装时，会在界面里选啊选，实际这个时候没安装，而是生成anaconda-ks.cfg这个文件；
+				所以如果实现生成anaconda-ks.cfg，就不用安装界面了；
+
+1. RedHat 安装的深层讨论
+2. RedHat 安装程序-anaconda
+3. Kickstart 安装机制
+4. 执行kisckstart 安装的必要条件
+5. ks 安装文件详解
+6. kickstart 的执行方式与配置
+
+1. KickStart安装
+	存放介质：把ks.cfg放在U盘、共享等地方
+
+	vim ~/anaconda-ks.cfg 【找一个已经装好的系统，当作模板】
+		text				【全文本，不要图形界面，这样会很快】
+		reboot				【安装后自动重启系统，否则可能会停止在 finish界面】
+		install				【安装，也有update升级的选项】
+		cdrom				【数据源 | 也可以是共享： nfs --server=192.168.1.100 --dir=/var/ftp/pub/rhel4u2】
+
+		langsupport --default=en_US.UFT-8 zh_CN.UTF-8 en_US.UTF-8  【默认英文，但需要中文支持】
+		lang en_US.UTF-8	【纯用英文】
+		keyboard us 		【用英文的键盘】
+
+		network --onboot no --device eth0 --bootproto dhcp --noipv6		【dhcp】
+		network --device eth0 --bootproto static --ip 192.168.1.101 --netmask 255.255.255.0 --gateway 192.168.1.1
+
+		rootpw  --iscrypted $6$EMM22jdR9HWPPnPX$Re2FzksBUV2TCM5KoxWtvfz
+		vxcsg/Y2dg1aBgguLMoQVuVAUtcCbzThEFn7Jgwbyp49C1QspCOth2s2YxWsgQ/
+		firewall --service=ssh
+		authconfig --enableshadow --passalgo=sha512
+		selinux --enforcing
+		timezone --utc Asia/Shanghai
+		bootloader --location=mbr --driveorder=sda --append="crashkerne 	【内核的选项 --append='rhgb quiet'】
+		l=auto rhgb quiet"
+
+		注意下面3行，需把注释删掉，才能使用这个 .cfg文件，否则不会起作用，因为安装过程不会删分区
+		#clearpart -all		【删除所有分区】
+		#part / --fstype ext3 --size=10000 		【1个根分区 10G】
+		#part /boot --fstype ext3 --size=200 	【boot 分200MB】
+		#part swap --size = 256					【swap分区】
+
+		%Pachkages 			【 需要的安装的包 ， 可通过 system-config-package 查看】
+		@ admin-tools		【 @是一组包，而不是1个包，例如x-windows里面有38个包】
+		kernel 				【 1个包，因为不带@ 】
+		grub
+		kernel-devel
+
+
+
+
 
