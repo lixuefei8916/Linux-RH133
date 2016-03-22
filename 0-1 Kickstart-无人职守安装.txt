@@ -83,6 +83,9 @@ anaconda	-	这个是red hat安装脚本， 用python写的
 		/var/ftp 192.168.1.0/255.255.255.0(ro,sync)		把/var/ftp这个目录，共享给 192.168.1.0
 	service nfs start
 
+	验证nfs是否好用
+	mkdir /mnt/nfs
+	mount 192.168.16.138:/var/ftp/ /mnt/nfs 此时可以在/mnt/nfs里看到/var/ftp里的内容；
 
 3. 客户端（自动安装端）
 	安装界面时输入
