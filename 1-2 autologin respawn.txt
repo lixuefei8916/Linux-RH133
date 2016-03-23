@@ -12,8 +12,9 @@ vim /etc/inittab
 	vim /etc/inittab
 		6a:2345:respawn:/sbin/mingetty tty10 --autologin lxf
 	此时，每次登录 ALT + F10时，自动以lxf登录并开启bash，不用输入帐号，更不用知道密码
-		
+
 	进程过程：init把tty10打开，tty10把login打开，login把bash打开
 
 
-
+控制：
+	可以把 tty全部关闭，只把 ttyS0串口打开，这样就变为Cisco了
