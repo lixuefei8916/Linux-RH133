@@ -11,7 +11,7 @@ vim /etc/inittab
 我想每次自动用 lxf 登录
 	vim /etc/inittab
 		6a:2345:respawn:/sbin/mingetty tty10 --autologin lxf
-	此时，每次登录 ALT + F10时，自动以lxf登录，不用输入帐号，更不用知道密码	
+	此时，每次登录 ALT + F10时，自动以lxf登录并开启bash，不用输入帐号，更不用知道密码	
 
 
 
