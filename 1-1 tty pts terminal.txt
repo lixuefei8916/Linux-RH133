@@ -1,0 +1,26 @@
+
+w 可以查看到自己的登录方式
+
+
+
+TTY 虚拟控制台
+	echo "Hello" > /dev/tty1
+	echo "Hello" > /dev/tty6
+
+	/sbin/mingetty tty12
+	ALT + F12   此时可以tty12已被打开，但无法正常使用
+
+	原因inittab中，只写了6个
+	1:2345:respawn:/sbin/mignetty tty1
+	6:2345:respawn:/sbin/mignetty tty6
+
+
+pts/0 伪终端（ssh or 图形界面的新建终端）
+	ls /dev/pts   如果有1个登录，这里就会多1个，从0计数，动态
+	当新建终端口，就多了一个1
+
+	skill -9 pts/2	这样杀掉这个终端，及这个终端下的所有shell
+
+/dev/ttyS0	串行口控制台 (波特律)
+	/sbin/agetty ttyS0
+
