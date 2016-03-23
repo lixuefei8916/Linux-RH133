@@ -1,7 +1,17 @@
 1-2 autologin respawn
 
+为什么系统启动时，会打开6个控制台
+vim /etc/inittab
+	在运行级别在 2345 时，会生成6个控制台， 这里可以订制，重启生效；
+
+	respawn 是主进程，监视后面的进程是否存在
+	所以 respawn 来监视tty1-6这些控制台
 
 
+我想每次自动用 lxf 登录
+	vim /etc/inittab
+		6a:2345:respawn:/sbin/mingetty tty10 --autologin lxf
+	此时，每次登录 ALT + F10时，自动以lxf登录，不用输入帐号，更不用知道密码	
 
 
 
