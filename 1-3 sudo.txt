@@ -1,0 +1,43 @@
+﻿1-3 sudo 及 用户权限体系
+
+1. 用普通帐号登录，用sudo操作
+	为的是 不经意间做出错事
+	sudo ifconfig etho0 192.168.16.100
+
+
+
+3. ssh 普通账户登录
+	ssh lxf@192.168.16.100
+	sudo xxxxxx命令
+
+4. sudo 使用方法
+	sudo hostname
+	此时输入密码
+
+
+5. 设置 sudo可用命令
+	visudo   (vim /etc/sudo)
+		lxf ALL(所有地方) = /sbin/hostname,/sbin/shutdown
+		%tech  ALL(所有地方) = /sbin/hostname 			(%tech 是组名)
+
+		lxf ALL(所有地方) = NOPASSWD: /sbin/hostname  	(sudo hostname时 不用输入密码)
+
+
+6. 添加管理员 (uid=0也可以)
+	visudo (vim /etc/sudo)
+		User_Alias ADMINS = lxf			[ADMINS 是管理员组的别名]
+		最后一行，设置管理员可以运行什么命令
+		root	ALL=(ALL)	ALL
+		ADMINS	ALL=(ALL)	ALL
+
+7. 订制（建议以组方式设置）
+	部分人可以修改 网络
+	部分人可以 关机
+
+
+这种方式非内核，而修改配置文件即可
+
+
+大型企业的管理方法：
+	 3个人维护，不能用root登录，否则出错时找不到具体的人，但不给root他们没法维护，如何做？
+	找一台服务器，专门用来登录普通帐号，此机器启用audit(审计)机器，他还能从此机器用root去登录服务器群，并被记录日志，且此机器的登录日志无法被改；
