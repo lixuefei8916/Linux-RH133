@@ -16,7 +16,7 @@
 
 
 5. 设置 sudo可用命令
-	visudo   (vim /etc/sudo)
+	visudo   (vim /etc/sudoers)
 		lxf ALL(所有地方) = /sbin/hostname,/sbin/shutdown
 		%tech  ALL(所有地方) = /sbin/hostname 			(%tech 是组名)
 
@@ -24,7 +24,7 @@
 
 
 6. 添加管理员 (uid=0也可以)
-	visudo (vim /etc/sudo)
+	visudo (vim /etc/sudoers)
 		User_Alias ADMINS = lxf			[ADMINS 是管理员组的别名]
 		最后一行，设置管理员可以运行什么命令
 		root	ALL=(ALL)	ALL
