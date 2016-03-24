@@ -37,6 +37,15 @@
 		root	ALL=(ALL)	ALL
 		ADMINS	ALL=(ALL)	ALL
 
+
+7. sudo su (直接切换到root)
+	sudo su
+	source /etc/profile
+	这样输入的命令均以root权限及环境变量执行
+
+
+
+
 7. 订制（建议以组方式设置）
 	部分人可以修改 网络
 	部分人可以 关机
