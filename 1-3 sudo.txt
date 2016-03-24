@@ -17,6 +17,13 @@
 
 5. 设置 sudo可用命令
 	visudo   (vim /etc/sudoers)
+		lxf     ALL=(root)      /usr/sbin/useradd,/sbin/ifconfig,/usr/sbin/userdel
+			lxf	帐号
+			ALL	在什么地方
+			(root)	使用sudo后以什么身份(目的用户身份）来执行命令
+			/us...	以sudo命令允许执行的命令
+		
+		
 		lxf ALL(所有地方) = /sbin/hostname,/sbin/shutdown
 		%tech  ALL(所有地方) = /sbin/hostname 			(%tech 是组名)
 
