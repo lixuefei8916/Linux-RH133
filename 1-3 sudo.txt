@@ -45,6 +45,17 @@
 
 
 
+8. sudo组别名 -- 多个用户的设置（非同一群组用户）：
+	# User_Alias ADMINS = jsmith, mikem      //这个就是一个实例行，按照这个写自己的
+	User_Alisa lxfsudouser=user1,user2,user3,user4 //第一一个别名suduouser
+
+	lxfsudouser   ALL=(root)    /usr/sbin/useradd,/sbin/ifconfig  ////命令行书写格式，用户列用别名
+
+
+9. 多个命令的设置 -- (//多个命令定义一个命令别名；)
+	Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables
+	lxfsudouser   ALL=(root)    NETWORKING  //命令行书写格式，命令列用别名
+
 
 7. 订制（建议以组方式设置）
 	部分人可以修改 网络
