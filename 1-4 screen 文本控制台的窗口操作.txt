@@ -1,0 +1,40 @@
+1-4 screen 文本控制台的窗口操作
+
+
+screen - 在文本下的窗口处理器
+	1. 可以防止 进程 被以外终止
+	
+
+	2.例如：
+	updatedb是需要执行很长时间， 而且我无法常时间职守， 我需要离开，或者网络也许会闪断
+	此时可以用
+	screen bash
+	updatedb
+
+	好处：比如网络不稳定，导致无法连接，被kill掉 killall -9 tty2
+
+	此时ssh被关闭，但重新登录后，其还是在执行的，pstree | grep updatedb
+
+
+	3. 重新连接  screen -r 恢复
+		screen -r
+
+	4. 终止 screen 
+		screen -dr
+
+	5. 另外一台机器上去 ssh，也可以用 screen -r
+
+	6. screen多选任务
+		screen -r PID
+
+
+
+
+
+
+
+
+
+
+
+
