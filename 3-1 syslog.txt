@@ -1,7 +1,64 @@
 3-1 syslog
 
+日志目录
+	/var/log
+
+需求
+	1. 实施查看log （为什么服务没起来）
+		tail -f /var/log/messages
+	2. ssh登录的异常
+		tail /var/log/secure
+	3. mail方面问题
+		tail /var/log/maillog
+	4. apache问题
+		tail /var/log/httpd/error_log
+	    编译安装的apache在安装目录的log下
+	5. mysql问题
+		tail 安装目录/var/lxf主机名.err
+
+syslog机制
+	klogd	可以通过man 2 syslog看到 ， kernel方面的日期
+	syslogd 可以通过man 3 syslog看到 ， 
 
 
+dmesg 内核中的日志缓存  
+	/var/log/dmesg 把缓存写到硬盘（文件）里
+	放设备日志
+
+syslogd 配置文件 
+	/etc/syslog.conf
+	管理/var/log/messages  secure  maillog
+
+dmesg和syslogd共同文件
+	/etc/sysconfig/syslog
+
+级别
+	LOG_EMERG	导致错误退出前的最后消息
+	LOG_ALERT
+	LOG_CRIT
+	LOG_ERR
+	LOG_WARNING
+	LOG_NOTICE
+	LOG_INFO
+	LOG_DEBUG	最啰嗦的，流水笔记（我走路，迈左腿，迈右腿）
+
+
+自己做日志
+	logger " `date` backup finish.........."
+	此时 tail /var/log/messages 就会多上面一行内容
+
+
+远程日志
+	日志服务器
+		vi /etc/sysconfig/syslog
+			SYSLOGD_OPTION="-m 0 -r"
+		/etc/init.d/syslog restart
+
+	客户端
+		vi /etc/syslog.conf
+			*.alert @192.1服务端:/var/log/aaa
+
+	logwathc
 
 
 
