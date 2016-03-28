@@ -20,17 +20,23 @@ screen - 在文本下的窗口处理器
 		screen -r
 
 	4. 终止 screen 
-		screen -dr
+		screen -dr 但会话任务还在
 
 	5. 另外一台机器上去 ssh，也可以用 screen -r
 
 	6. screen多选任务
 		screen -r PID
 
+		例子：
+			pstree | grep -A1 -B2 screen
+			pstree | grep -A2 -B2 screen
 
-
-
-
+			screen vi /etc/passwd
+			相当于 screen 打开了一个bash	
+						  打开了 vi
+			screen	  vi  打开了 /etc/passwd
+			此时screen -r 恢复，但报错，她告诉你有2个 4410.pts-5.lxf.com / 4343.pst.6.lxf.com
+			screen -r 4410
 
 
 
