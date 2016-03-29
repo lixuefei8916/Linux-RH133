@@ -6,11 +6,78 @@
 
 	crond 
 		crond		按照计划执行
+
 		anacrond	如果计划未成功，则anacrond去补任务
 
-	
+
+用途
+	例1：每天凌成4点，备份并且清临时文件；
+
+crond
+	user（登录账户的）
+		crontab -e 			编辑
+		/var/log/cron 		日志，查看任务是否执行成功
+	system
 
 
+User的crontab 
+	ls /var/spool/cron/目录下
+
+	crontab -e				编辑 ， lxf帐号的计划任务，无论帐号登录与否都执行；
+		1 2 3 4 5 	rm -rf /tmp	
+			1: 分钟
+			2：小时
+			3：每天
+			4：每月
+			5：周（星期几）
+
+
+	备份任务 [dump的好处是能识别分区，例如/dev/sda1]
+		每周1，3，5 5:01分 进行1次 3uf（增量） 备份
+		1 5 * * 1,3,5 dump -3uf /tmp/data.`date +%y%m`.dump /boot
+
+		每周五日 5:31 进行完整备份
+		31 5 * * 5-7 dump -0uf /tmp/data.`date +%y%m`.dump /boot
+
+	发消息
+		周1-5 每2个小时发一封
+		1 */2 * * 1-5 cat hello.txt | mail -s "hello lxf `date`"   [mail -s 是主题]
+
+
+	root修改别人的计划任务
+		ls /var/spool/cron/目录下
+		crontab -u lxf -e
+
+重要文件及配置
+	ls /etc/cron.xxxxxx
+
+	/etc/crontab 配置文件：	
+		每小时 	root run-parts /etc/cron.hourly
+		每周    root run-parts          .daily
+		每天  	root run-parts	        .weekly
+		每月 	root run-parts 			.monthly
+
+				root：以root执行
+				run-parts,改目录下所有的可执行文件，都执行
+
+
+	/etc/crond/sa-upate 非固定周期的任务 （仅root可改）
+
+
+系统默认的计划任务
+	/etc/cron.daily  [每日执行]
+		00webalizer		分析日志
+		0logwathc		
+		cups
+		mlocate.cron 	查找 locate命令的索引库更新
+		rpm
+		tmpwatch 		tmp下，超过10天没动的文件删除
+		logrotate		/var/log下的日志轮转功能
+		makewhatis.cron   man page
+
+
+sysstat 每10分钟执行1次， 监视系统执行状态
+	vi 
 
 
 
