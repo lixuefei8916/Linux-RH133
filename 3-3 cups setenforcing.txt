@@ -1,6 +1,10 @@
 # 3-3 cups setenforcing
 
+cups ： 通用uninx 打印机系统
+	chkconfig --list cups 
+	接收打印请求，及别人的打印请求
 
+	cups-lpd	linux继承与unix，这东西很老，被cups取代  
 
 
 
