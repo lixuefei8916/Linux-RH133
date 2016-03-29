@@ -76,9 +76,23 @@ User的crontab
 		makewhatis.cron   man page
 
 
+
+新建任务
+	vi /etc/cron.d/lxf    [权限600]
+		x x x x x user script
+
+
 sysstat 每10分钟执行1次， 监视系统执行状态
-	vi 
 
 
+-------------------
+anacron 更新文件的时间
+	比如， 今天的定时时间没有时间标记，因为关机了，过了5个小时，开机时发现该文件没有执行，则anacron会执行
+
+
+-------------------
+at任务，只执行1次
+	at 12:00
+		echo "hello"
 
 
