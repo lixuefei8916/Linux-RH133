@@ -1,0 +1,17 @@
+# 3-2 cron anacron
+
+计划任务
+	atd
+		装机后就关闭  chkconfig atd off
+
+	crond 
+		crond		按照计划执行
+		anacrond	如果计划未成功，则anacrond去补任务
+
+	
+
+
+
+
+
+
