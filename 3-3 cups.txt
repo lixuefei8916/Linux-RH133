@@ -1,0 +1,29 @@
+# 3-3 cups
+
+cups ： 通用uninx 打印机系统
+	chkconfig --list cups 
+	接收打印请求，及别人的打印请求
+
+	cups-lpd	linux继承与unix，这东西很老，被cups取代  
+
+cups配置 （图形界面下完成）
+	system-config-printer
+
+	new Printer
+		name: lxf's printer
+		select connection:	
+			  ★Internet Printing Protocaol(ipp) 网络打印机
+				Hostname : 192.168.99.200
+				Printername : lxf's printer [打印机name名称]
+
+				其他：
+					Serial Port 串口打印机，设置波特率
+					AppSocket/HP JetDirect  惠普
+					LPT 传统并口
+
+		选择类型： Generic (通用类型)， 或选择其他品牌
+		Models ： text-only printer / 或者选择指定驱动
+
+		发布共享打印机： Allow 
+		并且设置谁可以访问，谁不能访问
+
