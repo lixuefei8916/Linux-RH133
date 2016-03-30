@@ -1,0 +1,14 @@
+4-1 grub
+
+开机过程
+	BIOS -- bootloader -- kernel -- 
+			win(ntldr)
+
+
+
+
+
+
+
+
+4-1 grub troubleshooting
