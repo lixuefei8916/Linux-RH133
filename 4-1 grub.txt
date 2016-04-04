@@ -45,5 +45,13 @@
 
 
 
+先Windos + 后Linux的gurb
+	第一个分区是c
+	第2个分区是/boot
+	然后把 最开始的扇区换为 gurb，实现双引导；
 
-4-1 grub troubleshooting
+
+
+
+
+4-1 grub 和 troubleshooting 和 先Windos后Linux的gurb
