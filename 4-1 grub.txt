@@ -1,12 +1,47 @@
 4-1 grub
 
 开机过程
-	BIOS -- bootloader -- kernel -- 
+	BIOS -- bootloader -- kernel -- init -- service -- login -- bash
 			win(ntldr)
+			Linux(grub)
+
+
+双启动 结构(过程)
+	linux不太涉及bootloader的东西，但如果双启动的话会用到
+
+	一块硬盘 低格以后，最小的8位，sector扇区（512字节），相当于建立了一个仓库，几个512字节会组成一个柱面；
+
+	如何摆放：
+		446字节 	MBR 主引导记录 - 系统最开始的启动，硬盘启动后的第1个部分，bootloader；
+		64字节		DPT 分区表，stage1 - /boot/grub/stage1  512个字节；stage1_5_Ext3(放在分区之外);stage2（放在/boot/grub）
+					前面是标准分区表
+			2字节 	表示前面的数据是正常的，当最后2个字节是 55AA 时，说明前面是 MBR DPT
+
+
+/boot/grub/stage1  出问题现象：
+	1. 错误提示：该硬盘无法引导 / 该介质无引导记录
+	2. 左上角出现： Grub
+	3. 全屏刷 GRUB
+
+/boot/grub/stage2  出问题现象：
+	同/stage1， 但有时直接提示 stage2无法找到
+
+如何解决 stage1 问题（上述的）
+	运行 grub-install
+
+如何解决 stage2 问题（上述的）
+	cdrom启动
+	linux rescue
+	chroot /mnt/sysimage
+	rpm -ivh grub
+
+	也需运行 grub-install  (解决 stage1 和 stage2问题)
 
 
 
-
+/boot/grub/grub.conf 或者 lstmenu 出错
+	左上角提示： gurb> 等待输入命令
+	重建 grub.conf，可以手动输入这配置文件里的内容；
 
 
 
