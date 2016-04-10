@@ -1,13 +1,49 @@
 # 4-2 grub kernel root
 
+Linux机器启动顺序：
+	BIOS - Bootloader - kernel - init - service - login - bash
+
+
+当开机出现 grub>：....  则需要重建/boot/grub/grub.conf
+此时stage1 stage1-5已经运行完成了
+
+grub版本
+	rpm -qa | grep gurb
+
 双Linux
 	把Blinux放在 另外一个分区的TPR中
 	这个地方的 GRUB 去引导另一个地方的GRUB
 	1个GRUB引导内核
 
 GRUB的那些操作
+	grub文件说明
+		cd /boot/grub
+		这里有  stage1(512字节) / stage1_5  | 写在分区前面的
+				grub.conf
+
+	grub.conf (可以运行什么命令)
+		【kernel的命令】
+			root(hd0,0)
+			kernel /vmlinuz-2.6.18-194.el5 ro root=LABEL=/ rhgb quiet
+			initrd /initrd-2.6.18-194.el5.img
+
+		【可以删除的】
+			【可以把 rhgb 删除， 它是自动启动图形界面，把内核信息遮盖起来】
+			【可以把 quit删除， 它是让内存安静，例如】
+			【即变为：kernel /vmlinuz-2.6.18-194.el5 ro root=LABEL=/】
+
+		【hd0,0】
+			sda/hda是设备文件， 是驱动运行之后的事情
+			linux还没启动呢，所以hd0,0是gurb找第1个硬盘即hd0，第1个分区-hd0,0
+			去第1个硬盘，第1个分区下找 /vmlinuz 【/ = /boot分区】
+			mount /dev/sda1 /boot
+			[可以改为]kernel /vmlinuz-2.6.18-194.el5 ro root=/dev/sda2
 
 
+		【initrd】
+			与内核启动相关的驱动程序，放在 initrd /initrd-2.6....img
+			如果编译 vmlinuz大概需要1个小时（对不同的台式机编译不同的硬件驱动；）
 
+			scsic的芯片在 initrd中
 
 # 4-2 grub kernel root
