@@ -1,0 +1,3 @@
+# 4-3 initrd usb scsi
+
+# 4-3 initrd usb scsi
