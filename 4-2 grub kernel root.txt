@@ -1,0 +1,13 @@
+# 4-2 grub kernel root
+
+双Linux
+	把Blinux放在 另外一个分区的TPR中
+	这个地方的 GRUB 去引导另一个地方的GRUB
+	1个GRUB引导内核
+
+GRUB的那些操作
+
+
+
+
+# 4-2 grub kernel root
