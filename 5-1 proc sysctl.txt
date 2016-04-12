@@ -1,8 +1,70 @@
 # 5-1 proc sysctl
 
+文件系统
+
+/proc 【用于看】
+	ls /proc 虚拟的文件系统,全部是内存的结构
+	mount -t proc none /aaa
+	ls /aaa
+
+
+修改/proc参数
+	/proc/sys 可以vi写入 
+
+	/proc/其他只能echo写入
+		cd /proc/sys/net/ipv4/
+		cat icmp_echo_ignore_all   默认为0 = 可以ping通
+		echo 1 > icmp_echo_ignore_all	无法ping通
+
+	但重启后是不生效的，如何让他永久生效，需要sysctl
 
 
 
+sysctl 【用于永久修改】
+	方法
+	1. 配置文件	/etc/sysctl.conf
+	2. sysctl -w
+
+	例：sysctl -w net.ipv4.icmp_echo_ignore_all = 1
+			注：1. 把/proc/sys取消
+				2. / 改为 .
+
+	例： 开启 路由器 功能 (从A网卡接收，转发到B网卡 = 从内网接收，转外网发出去)
+		cat /proc/sys/net/ipv4/ip_forward
+
+sysctl -p
+
+sysctl -a 	把可以设置的内核参数显示出来；
+	实战：（1台机器有问题，怀疑内核问题）
+		sysctl -a > /tmp/a.sysctl
+		拷贝到另一台，有问题的电脑，做对比
+		sysctl -p -f /tmp/a.sysctl
+
+	
+
+常用内核参数介绍
+	ping功能
+	/proc/sys/net/ipv4/icmp_echo_ignore_all
+
+	路由转发
+	cat /proc/sys/net/ipv4/ip_forward
+
+	最大打开文件个数
+	sysctl -a | grep fs.file-max
+
+	共享内存最大值、最小值
+	sysctl -a | grep shm		装Orcal时会调
+
+
+
+经查看的地方
+	内存：
+		free
+		cat /proc/meminfo
+
+	vmstat
+	vmstat 1 10		间隔1秒，做10次
+	ps
 
 
 # 5-1 proc sysctl
