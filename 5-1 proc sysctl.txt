@@ -20,6 +20,12 @@
 
 
 
+查看 pic设备有哪些
+	cat /proc/bus/pci/devices
+	lspci命令
+
+
+
 sysctl 【用于永久修改】
 	方法
 	1. 配置文件	/etc/sysctl.conf
@@ -62,9 +68,55 @@ sysctl -a 	把可以设置的内核参数显示出来；
 		free
 		cat /proc/meminfo
 
-	vmstat
-	vmstat 1 10		间隔1秒，做10次
+
 	ps
+
+
+vmstat的使用
+	vmstat 1 10		间隔1秒，做10次
+	| free | buff | cache | si | so | bi | bo | in | cs | us | sy | id |wa
+
+	free	内存耗尽
+	bi		block设备读出
+	bo		block设备写入
+
+	us		用户 空间当中的进程，例如apache 所占用的
+	sy 		系统 空间当中的进程，例如频繁的去访问1个文件，此时用年个磅秒年的驱动去访问硬盘；
+			例如写循环遍历整个目录N遍
+
+			若us少，sy多， 可能是网络攻击，发大量的信息包 / 或者acpa出BUG
+
+	id 		剩余cpu
+	wa		因为io问题导致cpu占用很高；
+
+	swap(si so)	如果用到swap，也就等于系统将要完蛋；
+
+top找元凶
+	
+ps -aux
+
+uname -a
+
+uptime
+	系统启动了多长时间，load average:1分钟  5分钟  15分钟，等待执行任务的个数
+	同时iowaite也会高，
+	即 用户访问网页的等待会大
+
+swapon 打开swap
+swapon -s 查看虚拟内存的使用情况
+
+pmap -p 1 查看某个进程的内存情况
+
+df 查看硬盘使用情况
+
+du 看目录有多大
+	du -sh /etc
+
+fdisk -l 	查看所有分区
+
+iostat	显示IO情况，到底哪块硬盘有数据量
+	iostat 1 10
+	需要安装 sysstat包
 
 
 # 5-1 proc sysctl
