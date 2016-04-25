@@ -128,6 +128,8 @@ iostat	显示IO情况，到底哪块硬盘有数据量
 	Intel(R) Core(TM)2 Duo CPU     E8300  @ 2.83GHz
 	
 
+	# 查看物理CPU个数
+	cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
 
 
 
