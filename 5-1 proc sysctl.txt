@@ -119,4 +119,18 @@ iostat	显示IO情况，到底哪块硬盘有数据量
 	需要安装 sysstat包
 
 
+------------------------------------------------------------------------
+个人实战
+
+收集硬件信息（可用于固定资产整理）
+	cpu信息的收集
+	cat /proc/cpuinfo | grep name | awk -F: '{print $2}' | tail -1
+	Intel(R) Core(TM)2 Duo CPU     E8300  @ 2.83GHz
+	
+
+
+
+
+
+
 # 5-1 proc sysctl
