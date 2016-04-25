@@ -136,5 +136,8 @@ iostat	显示IO情况，到底哪块硬盘有数据量
 
 	# 查看逻辑CPU的个数
 	cat /proc/cpuinfo| grep "processor"| wc -l
+	cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+      		2  Intel(R) Core(TM)2 Duo CPU     E8300  @ 2.83GHz
+
 
 # 5-1 proc sysctl
